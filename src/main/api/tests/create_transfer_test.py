@@ -1,5 +1,6 @@
 import pytest
 
+
 from src.main.api.models.deposit_request import DepositRequest
 from src.main.api.models.transfer_request import TransferRequest
 
@@ -135,14 +136,36 @@ class TestCreateTransfer:
     #     assert create_transfer_response.fromAccountIdBalance == balance - create_transfer_request.amount
     #     print(create_transfer_response.fromAccountIdBalance)
 
-    def test_transfer_deposit(self, api_manager, create_user_request):
-        from_account_id = api_manager.user_steps.create_account(create_user_request).id
-        deposit_request = DepositRequest(accountId=from_account_id, amount=5000)
-        deposit = api_manager.user_steps.create_deposit(create_user_request, deposit_request)
+    # def test_transfer_deposit(self, api_manager, create_user_request):
+    #     from_account_id = api_manager.user_steps.create_account(create_user_request).id
+    #     deposit_request = DepositRequest(accountId=from_account_id, amount=5000)
+    #     deposit = api_manager.user_steps.create_deposit(create_user_request, deposit_request)
+    #
+    #     to_account_id = api_manager.user_steps.create_account(create_user_request).id
+    #     create_transfer = TransferRequest(fromAccountId=from_account_id, toAccountId=to_account_id, amount=3000)
+    #
+    #     transfer_response = api_manager.user_steps.create_transfer(create_user_request, create_transfer)
+    #
+    #     assert transfer_response.fromAccountIdBalance == 2000
 
-        to_account_id = api_manager.user_steps.create_account(create_user_request).id
-        create_transfer = TransferRequest(fromAccountId=from_account_id, toAccountId=to_account_id, amount=3000)
+    @pytest.mark.parametrize('amount', [500, 600, 700, 1599.99, 5000])
+    def test_transfer(self, api_manager, create_user_request, from_account, to_account, amount):
+        create_transfer_request = TransferRequest(fromAccountId=from_account.id, toAccountId=to_account.id, amount=amount)
+        balance = from_account.balance
+        transfer_response = api_manager.user_steps.create_transfer(create_user_request, create_transfer_request)
 
-        transfer_response = api_manager.user_steps.create_transfer(create_user_request, create_transfer)
+        assert transfer_response.fromAccountIdBalance == balance - amount
 
-        assert transfer_response.fromAccountIdBalance == 2000
+
+    def test_transfer_excess(self, api_manager, create_user_request, from_account, to_account):
+        transfer_excess_request = TransferRequest(fromAccountId=from_account.id, toAccountId=to_account.id, amount=6000)
+        transfer_response = api_manager.user_steps.create_negative_transfer(create_user_request, transfer_excess_request)
+
+        assert 'Insufficient funds' in transfer_response.text
+
+    def test_transfer_zero(self, api_manager, create_user_request, from_account, to_account):
+        transfer_zero_response = TransferRequest(fromAccountId=from_account.id, toAccountId=to_account.id, amount=0)
+        response = api_manager.user_steps.create_negative_transfer(create_user_request, transfer_zero_response)
+
+        assert 'Amount must be greater than' in response.text
+
