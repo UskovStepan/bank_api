@@ -1,11 +1,11 @@
 
-
 import pytest
 
 from src.main.api.generators.model_generator import RandomModelGenerator
 from src.main.api.models.create_user_request import CreateUserRequest
 from src.main.api.models.credit_request import CreditRequest
 from src.main.api.models.deposit_request import DepositRequest
+from src.main.api.models.transfer_request import TransferRequest
 
 
 @pytest.fixture
@@ -43,3 +43,9 @@ def repay_account_with_credit_request(api_manager, create_user_request_credit, a
     credit_request = CreditRequest(accountId=account_with_credit_request.id, termMonths=12, amount=9000)
     response = api_manager.user_steps.create_credit_request(create_user_request_credit, credit_request)
     return response
+
+@pytest.fixture(scope='function')
+def get_transactions(api_manager, create_user_request, to_account, from_account):
+    create_transfer_request = TransferRequest(fromAccountId=from_account.id, toAccountId=to_account.id, amount=1000)
+    transfer_response = api_manager.user_steps.create_transfer(create_user_request, create_transfer_request)
+    return transfer_response

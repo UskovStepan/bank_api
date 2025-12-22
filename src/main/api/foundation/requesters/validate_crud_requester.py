@@ -25,3 +25,8 @@ class ValidateCrudeRequester(HttpRequester):
         response = self.crud_requester.delete(user_id)
         self.response_spec(response)
         return self.endpoint.value.response_model.model_validate(response.json())
+
+    def get(self, user_id: int):
+        response = self.crud_requester.get(user_id)
+        self.response_spec(response)
+        return self.endpoint.value.response_model.model_validate(response.json())

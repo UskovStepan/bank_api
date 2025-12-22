@@ -33,3 +33,11 @@ class CrudRequester(HttpRequester):
         )
         self.response_spec(response)
         return response
+
+    def get(self, user_id:int) -> Response:
+        response = requests.get(
+            url=f'{Config.fetch('backendUrl')}{self.endpoint.value.url}/{user_id}',
+            headers= self.request_spec
+        )
+        self.response_spec(response)
+        return response
