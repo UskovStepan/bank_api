@@ -14,9 +14,11 @@ from src.main.api.models.login_user_request import LoginUserRequest
 from src.main.api.models.login_user_response import LoginUserResponse
 from src.main.api.models.repay_credit_request import RepayCreditRequest
 from src.main.api.models.repay_credit_response import RepayCreditResponse
+from src.main.api.models.transactions_request import TransactionRequest
+from src.main.api.models.transactions_response import AccountTransactionResponse
 from src.main.api.models.transfer_request import TransferRequest
 from src.main.api.models.transfer_response import TransferResponse
-from src.main.api.requests.create_account_requester import CreateAccountRequest
+
 
 
 @dataclass
@@ -72,4 +74,10 @@ class Endpoint(Enum):
         request_model=RepayCreditRequest,
         url='/credit/repay',
         response_model=RepayCreditResponse
+    )
+
+    GET_TRANSACTIONS = EndpointConfiguration(
+        request_model=None,
+        url=f'/account/transactions',
+        response_model=AccountTransactionResponse
     )

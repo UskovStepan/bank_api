@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a63f5bb8-0c26-4d2b-af29-c8932684b6db" name="Changes" comment="add allure">
+      <change afterPath="$PROJECT_DIR$/src/main/api/models/transactions_request.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/api/models/transactions_response.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/api/fixtures/user_fixture.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/api/fixtures/user_fixture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/api/specs/response_specs.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/api/specs/response_specs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/api/foundation/endpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/api/foundation/endpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/api/foundation/requesters/crud_requester.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/api/foundation/requesters/crud_requester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/api/foundation/requesters/validate_crud_requester.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/api/foundation/requesters/validate_crud_requester.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/api/steps/user_steps.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/api/steps/user_steps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/api/tests/create_credit_request_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/api/tests/create_credit_request_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/api/tests/create_deposit_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/api/tests/create_deposit_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/api/tests/create_transfer_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/api/tests/create_transfer_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,18 +41,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "UskovStepan"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;UskovStepan&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/UskovStepan/bank_api.git",
-    "accountId": "0fac41f3-264b-4104-a937-2eebb193d7fe"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/UskovStepan/bank_api.git&quot;,
+    &quot;accountId&quot;: &quot;0fac41f3-264b-4104-a937-2eebb193d7fe&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -76,6 +78,7 @@
     "Python tests.Python tests for src.main.api.tests.create_deposit_test.TestCreateDepositTest.test_replenishment_deposit.executor": "Run",
     "Python tests.Python tests for src.main.api.tests.create_transfer_test.TestCreateDepositTest.test_replenishment_deposit.executor": "Run",
     "Python tests.Python tests for src.main.api.tests.create_transfer_test.TestCreateTransfer.executor": "Run",
+    "Python tests.Python tests for src.main.api.tests.create_transfer_test.TestCreateTransfer.test_get_transactions.executor": "Run",
     "Python tests.Python tests for src.main.api.tests.create_transfer_test.TestCreateTransfer.test_transfer.executor": "Run",
     "Python tests.Python tests for src.main.api.tests.create_transfer_test.TestCreateTransfer.test_transfer_deposit.executor": "Run",
     "Python tests.Python tests for src.main.api.tests.create_transfer_test.TestCreateTransfer.test_transfer_deposit_level_2.executor": "Run",
@@ -94,11 +97,11 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "StepanUskoB",
+    "git-widget-placeholder": "#1 on StepanUskoB",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>
-  <component name="RunManager" selected="Python tests.Python tests for src.main.api.tests.create_credit_request_test.TestCreateRequestCredit.test_board_sum_credit">
+  <component name="RunManager" selected="Python tests.Python tests for src.main.api.tests.create_transfer_test.TestCreateTransfer.test_get_transactions">
     <configuration name="Python tests for src.main.api.tests.create_credit_request_test.TestCreateRequestCredit.test_board_sum_credit" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="NewSwaggerTest" />
       <option name="ENV_FILES" value="" />
@@ -144,7 +147,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for src.main.api.tests.create_transfer_test.TestCreateTransfer" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for src.main.api.tests.create_transfer_test.TestCreateTransfer.test_get_transactions" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="NewSwaggerTest" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -155,11 +158,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;src.main.api.tests.create_transfer_test.TestCreateTransfer&quot;" />
+      <option name="_new_target" value="&quot;src.main.api.tests.create_transfer_test.TestCreateTransfer.test_get_transactions&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for src.main.api.tests.create_transfer_test.TestCreateTransfer.test_transfer" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for src.main.api.tests.repay_credit_test.TestRepayCredit.test_repay_credit_senior" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="NewSwaggerTest" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -170,17 +173,17 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;src.main.api.tests.create_transfer_test.TestCreateTransfer.test_transfer&quot;" />
+      <option name="_new_target" value="&quot;src.main.api.tests.repay_credit_test.TestRepayCredit.test_repay_credit_senior&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for src.main.api.tests.create_transfer_test.TestCreateTransfer.test_get_transactions" />
+        <item itemvalue="Python tests.Python tests for src.main.api.tests.repay_credit_test.TestRepayCredit.test_repay_credit_senior" />
         <item itemvalue="Python tests.Python tests for src.main.api.tests.create_credit_request_test.TestCreateRequestCredit.test_board_sum_credit" />
         <item itemvalue="Python tests.Python tests for src.main.api.tests.create_credit_request_test.TestCreateRequestCredit.test_request_credit_senior" />
         <item itemvalue="Python tests.Python tests for src.main.api.tests.create_deposit_test.TestCreateDepositTest.test_border_deposit" />
-        <item itemvalue="Python tests.Python tests for src.main.api.tests.create_transfer_test.TestCreateTransfer" />
-        <item itemvalue="Python tests.Python tests for src.main.api.tests.create_transfer_test.TestCreateTransfer.test_transfer" />
       </list>
     </recent_temporary>
   </component>
@@ -233,6 +236,29 @@
     </task>
     <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first_commitgg" />

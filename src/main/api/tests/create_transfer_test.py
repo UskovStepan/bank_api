@@ -169,3 +169,7 @@ class TestCreateTransfer:
 
         assert 'Amount must be greater than' in response.text
 
+    def test_get_transactions(self, api_manager, create_user_request, get_transactions):
+        transaction_response = api_manager.user_steps.get_transactions(create_user_request, get_transactions.fromAccountId)
+        assert transaction_response.id == get_transactions.fromAccountId
+        assert transaction_response.balance == get_transactions.fromAccountIdBalance
