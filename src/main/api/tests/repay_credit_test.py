@@ -125,11 +125,7 @@ class TestRepayCredit:
     #
     #     print(create_repay_response.model_dump())
 
-    def test_repay_credit_senior(self, api_manager, create_user_request_credit):
-        user_credit=api_manager.user_steps.create_account(create_user_request_credit)
-        credit_request=CreditRequest(accountId=user_credit.id, termMonths=12, amount=5000)
-        credit = api_manager.user_steps.create_credit_request(create_user_request_credit, credit_request)
-        repay_credit = RepayCreditRequest(creditId=credit.creditId, accountId=user_credit.id, amount=5000)
+    def test_repay_credit_senior(self, api_manager, create_user_request_credit, repay_account_with_credit_request):
+        repay_credit = RepayCreditRequest(creditId=repay_account_with_credit_request.creditId, accountId=repay_account_with_credit_request.id, amount=9000)
         repay_response = api_manager.user_steps.repay_credit(create_user_request_credit, repay_credit)
-        print(repay_response)
 

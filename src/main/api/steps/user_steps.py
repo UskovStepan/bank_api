@@ -28,6 +28,13 @@ class UserSteps(BaseSteps):
             ResponseSpecs.request_ok()
         ).post(deposit_request)
         return response
+    def create_negative_deposit(self, create_user_request: CreateUserRequest, deposit_request:DepositRequest):
+        response = ValidateCrudeRequester(
+            RequestSpecs.auth_headers(username=create_user_request.username, password=create_user_request.password),
+            Endpoint.DEPOSIT_ACCOUNT,
+            ResponseSpecs.request_bad()
+        ).crud_requester.post(deposit_request)
+        return response
 
     def create_transfer(self, create_user_request: CreateUserRequest, transfer_request:TransferRequest):
         response = ValidateCrudeRequester(
@@ -36,6 +43,13 @@ class UserSteps(BaseSteps):
             ResponseSpecs.request_ok()
         ).post(transfer_request)
         return response
+    def create_negative_transfer(self, create_user_request: CreateUserRequest, transfer_request:TransferRequest):
+        response = ValidateCrudeRequester(
+            RequestSpecs.auth_headers(username=create_user_request.username, password=create_user_request.password),
+            Endpoint.TRANSFER_ACCOUNT,
+            ResponseSpecs.request_bad()
+        ).crud_requester.post(transfer_request)
+        return response
 
     def create_credit_request(self, create_user_request_credit:CreateUserRequest, credit_request:CreditRequest):
         response = ValidateCrudeRequester(
@@ -43,6 +57,13 @@ class UserSteps(BaseSteps):
             Endpoint.CREDIT_REQUEST,
             ResponseSpecs.request_create()
         ).post(credit_request)
+        return response
+    def negative_credit_request(self, create_user_request_credit:CreateUserRequest, credit_request:CreditRequest):
+        response = ValidateCrudeRequester(
+            RequestSpecs.auth_headers(username=create_user_request_credit.username, password=create_user_request_credit.password),
+            Endpoint.CREDIT_REQUEST,
+            ResponseSpecs.request_bad()
+        ).crud_requester.post(credit_request)
         return response
 
     def repay_credit(self, create_user_request_credit: CreateUserRequest, repay_credit:RepayCreditRequest):
