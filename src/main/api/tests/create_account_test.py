@@ -1,7 +1,6 @@
 import pytest
 
 
-
 @pytest.mark.api
 class TestCreateAccount:
     def test_create_account(self, api_manager, create_user_request):

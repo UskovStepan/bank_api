@@ -1,4 +1,3 @@
-from src.main.api.models.deposit_request import DepositRequest
 import pytest
 
 @pytest.mark.api
@@ -28,17 +27,11 @@ class TestCreateDepositTest:
     #     assert create_deposit_response.balance == 3000
     #     print(create_deposit_response)
 
-    def test_deposit(self, api_manager, create_user_request):
-        account_id = api_manager.user_steps.create_account(create_user_request).id
-        deposit_request = DepositRequest(accountId=account_id, amount=5500)
-        create_deposit = api_manager.user_steps.create_deposit(create_user_request, deposit_request)
+    def test_positive_deposit(self, api_manager, create_user_request, account_deposit):
+        response = api_manager.user_steps.create_deposit(create_user_request, account_deposit)
+        assert response.balance == account_deposit.amount
 
-        assert create_deposit.balance == 5500
-
-    @pytest.mark.parametrize('amount', [100, 999, 9001, 10000])
-    def test_border_deposit(self, api_manager, create_user_request, from_account, amount):
-        deposit_request = DepositRequest(accountId=from_account.id, amount=amount)
-        response = api_manager.user_steps.create_negative_deposit(create_user_request, deposit_request)
-
-        assert 'Amount must be between' in response.text
+    def test_negative_deposit(self, api_manager, create_user_request, account_negative_deposit):
+        response = api_manager.user_steps.create_negative_deposit(create_user_request, account_negative_deposit)
+        assert 'Amount must be between 1000 and 9000' in response.text
 

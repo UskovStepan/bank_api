@@ -105,16 +105,11 @@ class TestCreateRequestCredit:
     #     print(f'response error: {create_credit_request.model_dump()}')
     #     assert create_credit_response.balance == 10000
 
-    def test_request_credit_senior(self, api_manager,create_user_request_credit, account_with_credit_request):
+    def test_request_credit(self, api_manager,create_user_request_credit, account_with_credit_request):
         credit_request = CreditRequest(accountId=account_with_credit_request.id, termMonths=12, amount=5000)
         response = api_manager.user_steps.create_credit_request(create_user_request_credit, credit_request)
-
         assert response.balance == 5000
 
-
-    @pytest.mark.parametrize('amount', [100, 4999, 15001, 20000])
-    def test_board_sum_credit(self, api_manager, create_user_request_credit, account_with_credit_request, amount):
-        credit_request = CreditRequest(accountId=account_with_credit_request.id, termMonths=12, amount=amount)
-        response = api_manager.user_steps.negative_credit_request(create_user_request_credit, credit_request)
-
-        assert 'Amount must be between 5000 and 15000' in response.text
+    def test_board_credit(self, api_manager, create_user_request_credit, credit_test_data):
+        response = api_manager.user_steps.negative_credit_request(create_user_request_credit, credit_test_data['credit_request'])
+        assert credit_test_data['expected_error'] in response.text

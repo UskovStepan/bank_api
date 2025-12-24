@@ -1,7 +1,4 @@
 import pytest
-from src.main.api.models.credit_request import CreditRequest
-from src.main.api.models.repay_credit_request import RepayCreditRequest
-
 
 @pytest.mark.api
 class TestRepayCredit:
@@ -125,7 +122,12 @@ class TestRepayCredit:
     #
     #     print(create_repay_response.model_dump())
 
-    def test_repay_credit_senior(self, api_manager, create_user_request_credit, repay_account_with_credit_request):
-        repay_credit = RepayCreditRequest(creditId=repay_account_with_credit_request.creditId, accountId=repay_account_with_credit_request.id, amount=9000)
-        repay_response = api_manager.user_steps.repay_credit(create_user_request_credit, repay_credit)
+    def test_repay_credit(self, api_manager, create_user_request_credit, repay_account_with_credit_request):
+        repay_response = api_manager.user_steps.repay_credit(create_user_request_credit, repay_account_with_credit_request)
 
+        assert repay_response.amountDeposited == repay_account_with_credit_request.amount
+
+        get_response = api_manager.user_steps.get_transactions(create_user_request_credit, repay_account_with_credit_request.accountId)
+
+        assert repay_account_with_credit_request.accountId == get_response.id
+        assert get_response.balance == 0

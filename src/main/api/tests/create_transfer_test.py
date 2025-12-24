@@ -1,9 +1,5 @@
 import pytest
 
-
-from src.main.api.models.deposit_request import DepositRequest
-from src.main.api.models.transfer_request import TransferRequest
-
 @pytest.mark.api
 class TestCreateTransfer:
     # username = 'Stepans041122'
@@ -149,27 +145,18 @@ class TestCreateTransfer:
     #     assert transfer_response.fromAccountIdBalance == 2000
 
     @pytest.mark.parametrize('amount', [500, 600, 700, 1599.99, 5000])
-    def test_transfer(self, api_manager, create_user_request, from_account, to_account, amount):
-        create_transfer_request = TransferRequest(fromAccountId=from_account.id, toAccountId=to_account.id, amount=amount)
-        balance = from_account.balance
-        transfer_response = api_manager.user_steps.create_transfer(create_user_request, create_transfer_request)
+    def test_positive_transfer(self, api_manager, create_user_request, from_account, transfer_request, amount):
+        balance_before = from_account.balance
+        transfer_response = api_manager.user_steps.create_transfer(create_user_request, transfer_request)
 
-        assert transfer_response.fromAccountIdBalance == balance - amount
+        assert transfer_response.fromAccountIdBalance == balance_before - amount
+
+        get_response = api_manager.user_steps.get_transactions(create_user_request, transfer_request.fromAccountId)
+
+        assert get_response.id == transfer_response.fromAccountId
+        assert get_response.balance == transfer_response.fromAccountIdBalance
 
 
-    def test_transfer_excess(self, api_manager, create_user_request, from_account, to_account):
-        transfer_excess_request = TransferRequest(fromAccountId=from_account.id, toAccountId=to_account.id, amount=6000)
-        transfer_response = api_manager.user_steps.create_negative_transfer(create_user_request, transfer_excess_request)
-
-        assert 'Insufficient funds' in transfer_response.text
-
-    def test_transfer_zero(self, api_manager, create_user_request, from_account, to_account):
-        transfer_zero_response = TransferRequest(fromAccountId=from_account.id, toAccountId=to_account.id, amount=0)
-        response = api_manager.user_steps.create_negative_transfer(create_user_request, transfer_zero_response)
-
-        assert 'Amount must be greater than' in response.text
-
-    def test_get_transactions(self, api_manager, create_user_request, get_transactions):
-        transaction_response = api_manager.user_steps.get_transactions(create_user_request, get_transactions.fromAccountId)
-        assert transaction_response.id == get_transactions.fromAccountId
-        assert transaction_response.balance == get_transactions.fromAccountIdBalance
+    def test_transfer_negative(self, api_manager, create_user_request, negative_transfer_request, negative_transfer_data):
+        response = api_manager.user_steps.create_negative_transfer(create_user_request, negative_transfer_request)
+        assert negative_transfer_data['expected_error'] in response.text
